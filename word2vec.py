@@ -64,6 +64,11 @@ vectorizer = CountVectorizer(analyzer = "word",   \
                              stop_words = None,   \
                              max_features = 5000) 
 
+# fit_transform() does two functions: First, it fits the model
+# and learns the vocabulary; second, it transforms our training data
+# into feature vectors. The input to fit_transform should be a list of 
+# strings.
+
 train_data_features = vectorizer.fit_transform(clean_trian_reviews)
 train_data_features = train_data_features.toarray()
 print(train_data_features.shape)
@@ -111,3 +116,7 @@ test_data_features = test_data_features.toarray()
 result = forest.predict(test_data_features)
 output = pd.DataFrame( data={"id":test["id"], "sentiment":result} )
 output.to_csv( "Bag_of_Words_model.csv", index=False, quoting=3 )
+
+#Forest takes trained data that has sentiment
+#then predicts sentiment field in result
+#
