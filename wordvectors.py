@@ -72,7 +72,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',\
 # Set values for various parameters
 num_features = 300    # Word vector dimensionality                      
 min_word_count = 40   # Minimum word count                        
-num_workers = 4       # Number of threads to run in parallel
+num_workers = 6       # Number of threads to run in parallel
 context = 10          # Context window size                                                                                    
 downsampling = 1e-3   # Downsample setting for frequent words
 
