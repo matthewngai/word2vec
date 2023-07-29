@@ -10,6 +10,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from gensim.models import Word2Vec
+# Fit a random forest to the training data, using 100 trees
+from sklearn.ensemble import RandomForestClassifier
 
 train = pd.read_csv("labeledTrainData.tsv", header=0, \
                     delimiter="\t", quoting=3)
@@ -188,3 +190,15 @@ for review in test["review"]:
         remove_stopwords=True ))
 
 testDataVecs = getAvgFeatureVecs( clean_test_reviews, model, num_features )
+
+forest = RandomForestClassifier( n_estimators = 100 )
+
+print ("Fitting a random forest to labeled training data...")
+forest = forest.fit( trainDataVecs, train["sentiment"] )
+
+# Test & extract results
+result = forest.predict( testDataVecs )
+
+# Write the test results
+output = pd.DataFrame( data={"id":test["id"], "sentiment":result} )
+output.to_csv( "Word2Vec_AverageVectors.csv", index=False, quoting=3 )
